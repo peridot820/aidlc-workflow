@@ -14,9 +14,9 @@ disable-model-invocation: true
 | 규칙 파일 | `.aidlc-rule-details/construction/code-generation.md` |
 | 실행 조건 | ALWAYS |
 | unit | ✅ 필요 |
-| 필요한 앞 산출물 | `inception/application-design/unit-of-work.md` |
+| 필요한 앞 산출물 | `inception/application-design/unit-of-work.md` 또는 Units Generation SKIP 기록 (단일 unit) |
 | 참고 | 실행한 설계 stage 산출물 `construction/{unit}/` |
-| 만드는 산출물 | `construction/plans/{unit}-code-generation-plan.md`, `construction/{unit}/code/`, 소스 · 테스트 |
+| 만드는 산출물 | `construction/plans/{unit}-code-generation-plan.md`, `construction/{unit}/code/`, 소스, 테스트 |
 
 - 인자: `$ARGUMENTS` (`--single` 포함 = 단독 실행, 없음 = 이동, 나머지 = unit 이름)
 - 경로는 `aidlc-docs/` 기준, `{unit}` = unit 이름

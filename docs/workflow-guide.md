@@ -45,14 +45,16 @@ Build and Test                           13  빌드, 테스트 지침과 실행 
 | 상황 | 호출 | 결과 |
 | --- | --- | --- |
 | 지금 어디까지 했는지 | `/aidlc` | 상태 표, 다음 스킬, 추적 점검 권장 여부 |
-| 특정 stage 로 이동 | `/aidlc-inception-requirements-analysis` 또는 `/aidlc req` | 진행 위치 변경 후 실행 (중간 stage 는 SKIP 표기) |
-| 지난 stage 다시 하기 | `/aidlc-inception-user-stories` | 그 stage 와 뒤 stage 를 재오픈. 기존 산출물은 유지/수정/처음부터 중 선택 |
+| 특정 stage 로 이동 | `/aidlc-inception-requirements-analysis` 또는 `/aidlc req` | 진행 위치 변경 후 실행 (중간 stage 는 SKIP 표기, EXECUTE 예정 stage 를 건너뛰면 영향 확인 후) |
+| 지난 stage 다시 하기 | `/aidlc-inception-user-stories` | 그 stage 와 뒤 stage 를 재오픈. 기존 산출물은 유지/수정/처음부터/취소 중 선택, 처음부터는 백업 후 덮어씀 |
+| 건너뛴 stage 추가 | 실행 계획에서 SKIP 인 stage 의 스킬 (예: `/aidlc-inception-application-design`) | 실행 계획과 상태 파일에 EXECUTE (추가) 로 기록 후 실행 |
+| 다음 unit 으로 | `/aidlc-construction-functional-design U2` | unit 순서 기준으로 앞으로 이동 (재오픈 아님) |
 | unit stage 실행 | `/aidlc-construction-code-generation guardian-share` 또는 `/aidlc codegen guardian-share` | 그 unit 의 stage 실행 |
 | 진행 위치를 바꾸지 않고 한 stage 만 | `/aidlc-construction-functional-design guardian-share --single` | 실행 후 `Single-Stage Runs` 에 기록 |
 | INCEPTION 끝 점검 | `/traceability-check inception` | 요구 -> 스토리 -> 컴포넌트 -> Unit 연결 점검 |
 | CONSTRUCTION 끝 점검 | `/traceability-check construction` | AC, NFR -> 구현 계획 -> 테스트 -> 실행 결과 연결 점검 |
 | 점검을 독립 맥락에서 | `/traceability-check-agent construction` | 서브에이전트가 대조 (Claude Code 전용) |
-| 세션을 새로 열었을 때 | `/aidlc` 후 안내된 스킬, 또는 "이어서 진행해 줘" | SessionStart hook (Claude Code) 또는 AGENTS.md 지침 (Codex) 이 상태 파일을 읽고 재개 |
+| 세션을 새로 열었을 때 | `/aidlc` 후 안내된 스킬, 또는 "이어서 진행해 줘" | SessionStart hook (Claude Code) 또는 AGENTS.md 지침 (Codex) 이 상태 파일을 읽고 재개. `/aidlc` 는 답변 대기 질문 파일도 함께 보여 준다 |
 
 ## 4. 질문 파일에 답하는 법
 

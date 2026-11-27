@@ -38,6 +38,7 @@ argument-hint: "[inception|construction]"
 
 - 실행 계획에서 SKIP 된 stage 의 고리는 `N/A` (사유: SKIP) 로 둔다
 - Units Generation 을 생략했으면 story map 없이 스토리 → 컴포넌트를 직접 대조한다
+- Application Design 을 생략했으면 컴포넌트 고리는 `N/A` (사유: SKIP) 로 두고 스토리 -> Unit 을 직접 대조한다. NFR 의 책임은 Unit (또는 Brownfield 면 `reverse-engineering/component-inventory.md` 의 기존 컴포넌트) 으로 대조한다
 - 파일이 실제 위치와 다르면 `aidlc-docs/` 안에서 같은 이름을 찾아 쓰고, 찾은 경로를 입력 목록에 적는다
 
 ### ② construction

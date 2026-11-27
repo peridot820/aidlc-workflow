@@ -14,8 +14,8 @@ disable-model-invocation: true
 | 규칙 파일 | `.aidlc-rule-details/inception/units-generation.md` |
 | 실행 조건 | CONDITIONAL |
 | unit | - |
-| 필요한 앞 산출물 | `inception/application-design/` (`components.md` 등), `inception/plans/execution-plan.md` |
-| 참고 | - |
+| 필요한 앞 산출물 | `inception/application-design/components.md` (규칙 파일 선행 조건: Application Design 필수), `inception/plans/execution-plan.md` |
+| 참고 | 실행한 경우 `inception/user-stories/stories.md` (스토리를 unit 에 매핑) |
 | 만드는 산출물 | `inception/application-design/unit-of-work*.md`, `inception/plans/unit-of-work-plan.md` |
 
 - 인자: `$ARGUMENTS` (`--single` 포함 = 단독 실행, 없음 = 이동)

@@ -1,7 +1,7 @@
 # AI-DLC stage 지도
 
 
-- 순서 = 표의 위에서 아래 (이동 방향 판단 기준)
+- 순서 = 표의 위에서 아래, unit 별 stage 는 아래 "순서 키" 로 판단
 - stage 별 규칙 파일 · 앞 산출물 · 만드는 산출물 = 각 stage 스킬 `SKILL.md` 의 표
 - 상태 표기 = `aidlc-docs/aidlc-state.md` 의 Stage Progress 항목 이름 (unit 별 stage 는 뒤에 `(<unit>)`)
 - 실행 조건 = `core-workflow.md` 기준 (ALWAYS = 항상, CONDITIONAL = 조건부)
@@ -41,8 +41,19 @@
 | 19 | `/aidlc-operations-performance-validation` | `perf` | Performance Validation | CONDITIONAL | - |
 | 20 | `/aidlc-operations-feedback-optimization` | `feedback` | Feedback & Optimization | CONDITIONAL | - |
 
-- unit 별 stage (8~12) 순서 = unit 안에서 8 → 12, unit 끼리는 `unit-of-work.md` 순서
+- unit 별 stage (8~12) 순서 = unit 안에서 8 -> 12, unit 끼리는 `unit-of-work.md` 순서
 - 13 Build and Test = 모든 unit 의 Code Generation 이후 1회, Operations = phase 단위 1회
+
+## 순서 키 (이동 방향 판단)
+
+| stage | 순서 키 |
+| --- | --- |
+| 1 ~ 7 | `(#)` |
+| 8 ~ 12 (unit 별) | `(8, unit 순번, #)`, unit 순번 = `unit-of-work.md` 의 순서 (단일 unit 이면 1) |
+| 13 ~ 20 | `(#)` |
+
+- 키를 앞에서부터 비교한다. 예: `Code Generation (U1)` = (8, 1, 12) < `Functional Design (U2)` = (8, 2, 8) -> 앞으로 이동
+- stage 번호만 비교하면 다음 unit 의 설계 stage 로 가는 이동이 "뒤로" 로 잘못 판정되어 재오픈이 일어난다
 
 ## stage 가 아닌 도구
 
