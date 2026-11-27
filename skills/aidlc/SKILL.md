@@ -33,6 +33,7 @@ disable-model-invocation: true
 - 현재 (Current Stage): [값]
 - 다음 (Next Stage): [값 또는 첫 미완료 항목]
 - 진행: [완료 수] / [전체 수 (SKIP 제외)]
+- 확장: [Enabled = Yes 인 확장 목록 또는 없음 / 미결정]
 
 | Phase | 완료 | 남음 | SKIP |
 | --- | --- | --- | --- |
@@ -53,6 +54,9 @@ disable-model-invocation: true
 - 다음 stage 의 스킬 이름은 stage-map 에서 상태 표기로 찾아 실제 이름으로 채움 (unit 별 stage 는 unit 이름까지)
 - `aidlc-state.md` 없음 → "AI-DLC 시작 전" + `/aidlc-inception-workspace-detection` 또는 "Using AI-DLC, ..." 요청 안내
 - `## Single-Stage Runs` 절이 있으면 최근 3줄 함께 표시
+- 답변 대기: `aidlc-docs/` 아래 `.md` 중 빈 `[Answer]:` 가 남은 파일이 있으면 "이어서 진행" 줄 위에 `- 답변 대기: [경로] (빈 [Answer]: n개)` 를 최대 5개 표시. 이 경우 다음 스킬보다 답변 작성이 먼저임을 함께 안내 (Codex 처럼 세션 hook 이 없는 환경의 재개 안내 역할)
+- unit 진행: CONSTRUCTION 항목에 `(완료: U1, ...)` 표기가 있으면 (stage-runner 3-6) 표 아래에 `- unit 진행: [stage] [완료 unit] / [전체 unit]` 을 한 줄로 표시
+- 상태 불일치 (Current Stage 가 Stage Progress 와 맞지 않음, 완료 표시인데 산출물 폴더 없음) 를 발견하면 고치지 말고 `- ⚠️ 상태 확인 필요: [내용]` 1줄로 알리고, 다음 stage 스킬 호출 시 stage-runner 2절에서 바로잡는다고 안내
 
 ## 3. 별칭으로 stage 실행 (`/aidlc <별칭> [unit] [--single]`)
 

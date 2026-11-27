@@ -14,9 +14,9 @@ disable-model-invocation: true
 | 규칙 파일 | `.aidlc-rule-details/construction/infrastructure-design.md` |
 | 실행 조건 | CONDITIONAL |
 | unit | ✅ 필요 |
-| 필요한 앞 산출물 | `construction/{unit}/functional-design/` 또는 `construction/{unit}/nfr-design/` |
-| 참고 | - |
-| 만드는 산출물 | `construction/{unit}/infrastructure-design/`, `construction/plans/{unit}-infrastructure-design-plan.md` |
+| 필요한 앞 산출물 | `construction/{unit}/functional-design/` |
+| 참고 | 있으면 `construction/{unit}/nfr-design/` (규칙 파일: NFR Design 권장) |
+| 만드는 산출물 | `construction/{unit}/infrastructure-design/`, `construction/plans/{unit}-infrastructure-design-plan.md`, 공유 인프라가 있으면 `construction/shared-infrastructure.md` |
 
 - 인자: `$ARGUMENTS` (`--single` 포함 = 단독 실행, 없음 = 이동, 나머지 = unit 이름)
 - 경로는 `aidlc-docs/` 기준, `{unit}` = unit 이름

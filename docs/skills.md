@@ -9,7 +9,7 @@
 
 | 스킬 | 인자 | 하는 일 | 필수 |
 | --- | --- | --- | --- |
-| `aidlc` | 없음, `status`, `<별칭> [unit] [--single]` | 진행 상태 표 (현재/다음 stage, phase 별 완료 수) 와 다음에 부를 스킬 안내. 별칭을 주면 그 stage 스킬과 같은 동작 | 필수 |
+| `aidlc` | 없음, `status`, `<별칭> [unit] [--single]` | 진행 상태 표 (현재/다음 stage, phase 별 완료 수, 활성 확장, unit 진행, 답변 대기 질문 파일) 와 다음에 부를 스킬 안내. 별칭을 주면 그 stage 스킬과 같은 동작 | 필수 |
 
 - `aidlc/stage-map.md`: stage 순서, 별칭, 상태 표기, 실행 조건 표 (모든 stage 스킬이 참조)
 - `aidlc/stage-runner.md`: stage 스킬 공통 절차 (이동, 단독 실행, 앞 산출물 확인, audit 형식)
@@ -52,9 +52,15 @@
 | 19 | `aidlc-operations-performance-validation` | `perf` | 성능 NFR 을 실환경에서 검증할 때 |
 | 20 | `aidlc-operations-feedback-optimization` | `feedback` | 운영 데이터가 있을 때 |
 
-- 인자 없음 = "이동": workflow 진행 위치를 그 stage 로 옮기고 실행 (건너뛴 stage 는 SKIP, 지난 stage 는 재오픈으로 표기)
+- 인자 없음 = "이동": workflow 진행 위치를 그 stage 로 옮기고 실행
+  - 앞으로: 사이의 stage 는 SKIP 표기. 실행 계획에 EXECUTE 였던 stage 가 끼어 있으면 영향 (빠지는 산출물, 영향받는 뒤 stage) 을 보여 주고 확인을 받는다
+  - 뒤로: 대상과 뒤 stage 를 재오픈 표기. 유지 / 수정 / 처음부터 / 취소 중 고르며, 처음부터는 기존 산출물을 `*.backup.<시각>` 으로 백업한 뒤 덮어쓴다
+  - 실행 계획에서 SKIP 이던 stage 로 이동하면 "건너뛴 stage 추가" 로 실행 계획과 상태 파일에 EXECUTE 로 기록한다
+  - unit 별 stage 의 방향은 unit 순서를 먼저 비교한다 (`aidlc/stage-map.md` 의 순서 키)
 - `--single` = 그 stage 만 실행하고 진행 위치는 그대로 (`aidlc-state.md` 의 `## Single-Stage Runs` 에 1줄 기록)
-- unit 이 필요한 stage 에 unit 을 빼면 `unit-of-work.md` 의 unit 목록을 보여 주고 고르게 한다
+- unit 이 필요한 stage 에 unit 을 빼면 `unit-of-work.md` 의 unit 목록을 보여 주고 고르게 한다. Units Generation 을 SKIP 한 단일 unit 프로젝트면 unit 이름 하나를 정해 계속 쓴다
+- 스킬로 바로 들어와도 공통 규칙, 활성 확장 규칙, 앞 산출물을 먼저 읽고, 완료 메시지 앞에 AI 점검 결과와 확장 준수 요약을 붙인다 (`aidlc/stage-runner.md` 0절, 3-5)
+- 진행 규칙의 근거: `common/workflow-changes.md` (건너뛰기, 추가, 다시 시작), `common/error-handling.md` (상태 불일치 복구), `common/session-continuity.md` (앞 산출물 로드)
 
 ## 3. 점검 스킬 (stage 아님)
 
